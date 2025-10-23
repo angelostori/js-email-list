@@ -11,3 +11,18 @@ Abbellire con CSS o Bootstrap
 Inserire un bottone che al click faccia il fetch altre 10 mail (sostituendo le altre)
 
 */
+const randomMail = 'https://flynn.boolean.careers/exercises/api/random/mail'
+
+for (let i = 0; i < 10; i++) {
+    //chiamata axios
+    axios.get(randomMail)
+        .then((response) => {
+            console.log(response.data.response);
+            const email = response.data.response
+
+        })
+        .catch(() => {
+
+        })
+}
+
