@@ -14,7 +14,6 @@ Inserire un bottone che al click faccia il fetch altre 10 mail (sostituendo le a
 const randomMail = 'https://flynn.boolean.careers/exercises/api/random/mail'
 const emailList = document.getElementById('email-list')
 
-
 for (let i = 0; i < 10; i++) {
     //chiamata axios
     axios.get(randomMail)
