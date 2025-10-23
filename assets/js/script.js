@@ -15,26 +15,34 @@ const randomMail = 'https://flynn.boolean.careers/exercises/api/random/mail'
 const emailList = document.getElementById('email-list')
 
 function getMails() {
-    axios.get(randomMail)
-        .then((response) => {
-            //catturo la mail dall'oggetto response
-            const email = response.data.response
-            //ad ogni iterazione genero un list item
-            const li = document.createElement('li')
-            //ad ogni itearazione genero un list item valorizzato
-            li.textContent = email
-            //appendo il list item valorizzato nel tag ul
-            emailList.appendChild(li)
-        })
-        .catch(() => {
+    //pulisco la lista precedente
+    emailList.innerHTML = ''
 
+    //creo un array di 10 oggetti email casuali
+    const emails = []
+    for (let i = 0; i < 10; i++) {
+        emails.push(axios.get(randomMail))
+
+    }
+
+    // Uso Promise.all per attendere tutte le chiamate
+    Promise.all(emails)
+        .then((responses) => {
+            // Ogni response contiene una mail
+            responses.forEach((response) => {
+                const email = response.data.response;
+                const li = document.createElement('li');
+                li.textContent = email;
+                emailList.appendChild(li);
+            });
         })
+        .catch((error) => {
+            console.error('Errore nel recupero delle email:', error);
+        });
 }
 
-for (let i = 0; i < 10; i++) {
-    getMails()
-}
+// Prima generazione automatica di 10 mail all’avvio
+getMails();
 
-
-const button = document.getElementById('button')
-button.addEventListener('click', getMails)
+// Genera nuove mail al click del bottone
+button.addEventListener('click', getMails);
