@@ -15,7 +15,7 @@ const randomMail = 'https://flynn.boolean.careers/exercises/api/random/mail'
 const emailList = document.getElementById('email-list')
 
 function getMails() {
-     axios.get(randomMail)
+    axios.get(randomMail)
         .then((response) => {
             //catturo la mail dall'oggetto response
             const email = response.data.response
@@ -32,10 +32,9 @@ function getMails() {
 }
 
 for (let i = 0; i < 10; i++) {
-   getMails()
+    getMails()
 }
 
-const button = document.getElementById('button')
-button.addEventListener('click', ()=>{
 
-})
+const button = document.getElementById('button')
+button.addEventListener('click', getMails)
